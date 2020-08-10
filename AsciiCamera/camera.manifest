@@ -1,0 +1,16 @@
+ManifestFileVersion: 0
+CRC: 3387161440
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: dfce19568d5ae70d54c0ba90e8862a48
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 6370d3f9de9eca57f523bce048404a46
+HashAppended: 0
+ClassTypes:
+- Class: 48
+  Script: {instanceID: 0}
+Assets:
+- Assets/CameraShader.shader
+Dependencies: []
