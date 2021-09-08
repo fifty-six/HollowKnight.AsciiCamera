@@ -11,19 +11,13 @@ using USceneManager = UnityEngine.SceneManagement.SceneManager;
 namespace AsciiCamera
 {
     [UsedImplicitly]
-    public class AsciiCamera : Mod
+    public class AsciiCamera : Mod, IGlobalSettings<Settings>
     {
         private Shader _shader;
 
-        private Settings _settings = new Settings();
+        private Settings _settings = new();
 
         public override string GetVersion() => VersionUtil.GetVersion<AsciiCamera>();
-
-        public override ModSettings GlobalSettings
-        {
-            get => _settings;
-            set => _settings = (Settings) value;
-        }
 
         public override void Initialize()
         {
@@ -72,5 +66,9 @@ namespace AsciiCamera
             fx.ScaleFactor = _settings.Scale;
             fx.Shader = _shader;
         }
+
+        public void OnLoadGlobal(Settings s) => _settings = s;
+
+        public Settings OnSaveGlobal() => _settings;
     }
 }

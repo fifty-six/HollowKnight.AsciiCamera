@@ -4,7 +4,7 @@ using Modding;
 namespace AsciiCamera
 {
     [Serializable]
-    public class Settings : ModSettings
+    public class Settings 
     {
         public float Scale = 1;
 
