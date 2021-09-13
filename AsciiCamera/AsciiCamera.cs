@@ -28,7 +28,7 @@ namespace AsciiCamera
 
         private void OnSceneChanged(Scene arg0, Scene arg1)
         {
-            if (arg1.name != Constants.MENU_SCENE)
+            if (arg1.name == Constants.MENU_SCENE)
                 return;
             
             ApplyCamera();
@@ -59,6 +59,9 @@ namespace AsciiCamera
         {
             tk2dCamera tk2dCam = GameCameras.instance.tk2dCam;
             Camera cam = Mirror.GetField<tk2dCamera, Camera>(tk2dCam, "_unityCamera");
+
+            if (cam.gameObject.GetComponent<AsciiArtFx>())
+                return;
 
             var fx = cam.gameObject.AddComponent<AsciiArtFx>();
             fx.Tint = ColorUtility.TryParseHtmlString(_settings.Tint, out Color c) ? c : Color.white;

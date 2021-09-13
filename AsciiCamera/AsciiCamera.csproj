@@ -7,10 +7,11 @@
         <Product>Pale_Prince</Product>
         <Copyright>Copyright © Yusuf Bham 2021</Copyright>
         <OutputPath>bin\$(Configuration)\</OutputPath>
-        <Version>2.0.0</Version>
+        <Version>2.1.0</Version>
         <LangVersion>latest</LangVersion>
         <DebugType>portable</DebugType>
     </PropertyGroup>
+    
     <ItemGroup>
         <Reference Include="Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
             <HintPath>..\..\..\References\Assembly-CSharp.dll</HintPath>
@@ -25,6 +26,11 @@
             <HintPath>..\..\..\References\Mods\Vasi.dll</HintPath>
         </Reference>
     </ItemGroup>
+    
+    <ItemGroup>
+        <EmbeddedResource Include="camera" />
+    </ItemGroup>
+    
     <Target Name="CopyMod" AfterTargets="PostBuildEvent">
         <Copy SourceFiles="$(TargetPath);$(TargetDir)$(TargetName).pdb" DestinationFolder="D:/Steam/steamapps/common/Hollow Knight/hollow_knight_Data/Managed/Mods/$(TargetName)" SkipUnchangedFiles="true" />
     </Target>
