@@ -11,7 +11,7 @@ using USceneManager = UnityEngine.SceneManagement.SceneManager;
 namespace AsciiCamera
 {
     [UsedImplicitly]
-    public class AsciiCamera : Mod, IGlobalSettings<Settings>
+    public class AsciiCamera : Mod, IGlobalSettings<Settings>, ITogglableMod
     {
         private Shader _shader;
 
@@ -23,7 +23,12 @@ namespace AsciiCamera
         {
             LoadShader();
 
-            UnityEngine.SceneManagement.SceneManager.activeSceneChanged += OnSceneChanged;
+            USceneManager.activeSceneChanged += OnSceneChanged;
+
+            if (GameManager.instance.sceneName == Constants.MENU_SCENE)
+                return;
+
+            ApplyCamera();
         }
 
         private void OnSceneChanged(Scene arg0, Scene arg1)
@@ -36,6 +41,8 @@ namespace AsciiCamera
 
         private void LoadShader()
         {
+            if (_shader != null) return;
+
             var asm = Assembly.GetExecutingAssembly();
 
             string bundle = asm.GetManifestResourceNames().First(x => x.Contains("camera"));
@@ -73,5 +80,18 @@ namespace AsciiCamera
         public void OnLoadGlobal(Settings s) => _settings = s;
 
         public Settings OnSaveGlobal() => _settings;
+
+        void ITogglableMod.Unload()
+        {
+            USceneManager.activeSceneChanged -= OnSceneChanged;
+            if (GameManager.instance.sceneName == Constants.MENU_SCENE) 
+                return;
+
+            tk2dCamera tk2dCam = GameCameras.instance.tk2dCam;
+            Camera cam = Mirror.GetField<tk2dCamera, Camera>(tk2dCam, "_unityCamera");
+            AsciiArtFx fx = cam.gameObject.GetComponent<AsciiArtFx>();
+            if (fx) 
+                Object.Destroy(fx);
+        }
     }
 }
