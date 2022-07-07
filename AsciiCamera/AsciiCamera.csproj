@@ -4,10 +4,10 @@
         <AssemblyName>AsciiCamera</AssemblyName>
         <TargetFramework>net472</TargetFramework>
         <AssemblyTitle>AsciiCamera</AssemblyTitle>
-        <Product>Pale_Prince</Product>
+        <Product>AsciiCamera</Product>
         <Copyright>Copyright © Yusuf Bham 2021</Copyright>
         <OutputPath>bin\$(Configuration)\</OutputPath>
-        <Version>2.1.0</Version>
+        <Version>2.2.0</Version>
         <LangVersion>latest</LangVersion>
         <DebugType>portable</DebugType>
     </PropertyGroup>
